@@ -12,7 +12,9 @@ function fetchDataAndUpdateUI() {
             updateUI(data);
         })
         .catch(error => {
+            // Handle error and display a message to the user
             console.error('Error fetching data:', error);
+            document.getElementById("output").innerHTML = "<p>Oops! Couldn't fetch a joke right now.</p>";
         });
 }
 
@@ -28,6 +30,7 @@ function updateUI(data) {
     // Update the content of the output div with the HTML content
     document.getElementById("output").innerHTML = htmlContent;
 }
+
 // Add click event listener for the Save button
 document.getElementById("saveButton").addEventListener("click", function () {
     const outputDiv = document.getElementById("output");
@@ -45,8 +48,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
     canvas.width = estimatedWidth;
     canvas.height = estimatedHeight;
   
-    // RenderING the HTML content onto the canvas using the library html2canvas
-    
+    // Rendering the HTML content onto the canvas using the library html2canvas
     html2canvas(outputDiv, { canvas }).then(function (canvas) {
       // Convert canvas to data URL
       const dataURL = canvas.toDataURL("image/png");
@@ -57,4 +59,4 @@ document.getElementById("saveButton").addEventListener("click", function () {
       link.download = "random_joke.png";
       link.click();
     });
-  });
+});
