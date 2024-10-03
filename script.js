@@ -28,3 +28,33 @@ function updateUI(data) {
     // Update the content of the output div with the HTML content
     document.getElementById("output").innerHTML = htmlContent;
 }
+// Add click event listener for the Save button
+document.getElementById("saveButton").addEventListener("click", function () {
+    const outputDiv = document.getElementById("output");
+    const html = outputDiv.innerHTML;
+  
+    // Create a temporary canvas element
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+  
+    // Get estimated dimensions based on content
+    const estimatedWidth = outputDiv.clientWidth;
+    const estimatedHeight = outputDiv.clientHeight;
+  
+    // Set canvas dimensions
+    canvas.width = estimatedWidth;
+    canvas.height = estimatedHeight;
+  
+    // RenderING the HTML content onto the canvas using the library html2canvas
+    
+    html2canvas(outputDiv, { canvas }).then(function (canvas) {
+      // Convert canvas to data URL
+      const dataURL = canvas.toDataURL("image/png");
+  
+      // Create a downloadable anchor element
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "random_joke.png";
+      link.click();
+    });
+  });
