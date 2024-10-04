@@ -60,3 +60,13 @@ document.getElementById("saveButton").addEventListener("click", function () {
       link.click();
     });
 });
+
+// Theme toggle functionality
+const themeToggleButton = document.getElementById("themeToggle");
+themeToggleButton.addEventListener("click", toggleTheme);
+
+function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    const isDarkTheme = document.body.classList.contains("dark-theme");
+    themeToggleButton.textContent = isDarkTheme ? "Switch to Light Theme" : "Switch to Dark Theme";
+}
