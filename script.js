@@ -29,6 +29,9 @@ function updateUI(data) {
 
     // Update the content of the output div with the HTML content
     document.getElementById("output").innerHTML = htmlContent;
+
+    // Enable the copy button
+    document.getElementById("copyButton").disabled = false;
 }
 
 // Add click event listener for the Save button
@@ -70,3 +73,18 @@ function toggleTheme() {
     const isDarkTheme = document.body.classList.contains("dark-theme");
     themeToggleButton.textContent = isDarkTheme ? "Switch to Light Theme" : "Switch to Dark Theme";
 }
+
+// Add click event listener for the Copy button
+document.getElementById("copyButton").addEventListener("click", function () {
+    const outputDiv = document.getElementById("output");
+    const jokeText = outputDiv.innerText;
+
+    navigator.clipboard.writeText(jokeText).then(function() {
+        alert("Joke copied to clipboard!");
+    }, function() {
+        alert("Failed to copy joke. Please try again.");
+    });
+});
+
+// Disable the copy button initially
+document.getElementById("copyButton").disabled = true;
